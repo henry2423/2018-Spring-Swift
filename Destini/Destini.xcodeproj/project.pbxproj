@@ -11,7 +11,6 @@
 		EBB1C7431B9633A60011F5C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB1C7421B9633A60011F5C3 /* ViewController.swift */; };
 		EBB1C7461B9633A60011F5C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB1C7441B9633A60011F5C3 /* Main.storyboard */; };
 		EBB1C7481B9633A60011F5C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBB1C7471B9633A60011F5C3 /* Images.xcassets */; };
-		EBB1C74B1B9633A60011F5C3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB1C7491B9633A60011F5C3 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +20,6 @@
 		EBB1C7421B9633A60011F5C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EBB1C7451B9633A60011F5C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EBB1C7471B9633A60011F5C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		EBB1C74A1B9633A60011F5C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +56,6 @@
 				EBB1C7421B9633A60011F5C3 /* ViewController.swift */,
 				EBB1C7441B9633A60011F5C3 /* Main.storyboard */,
 				EBB1C7471B9633A60011F5C3 /* Images.xcassets */,
-				EBB1C7491B9633A60011F5C3 /* LaunchScreen.xib */,
 				EBB1C73E1B9633A60011F5C3 /* Supporting Files */,
 			);
 			path = Destini;
@@ -132,7 +129,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBB1C7461B9633A60011F5C3 /* Main.storyboard in Resources */,
-				EBB1C74B1B9633A60011F5C3 /* LaunchScreen.xib in Resources */,
 				EBB1C7481B9633A60011F5C3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,14 +154,6 @@
 				EBB1C7451B9633A60011F5C3 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EBB1C7491B9633A60011F5C3 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EBB1C74A1B9633A60011F5C3 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
