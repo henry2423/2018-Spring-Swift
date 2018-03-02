@@ -10,16 +10,21 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    var itemArray = ["Find Mike", "Buy Eggs", "Destory Dmoy"]
+    var itemArray = [Item]()
     
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+        let newItem = Item()
+        newItem.title = "Find Mike"
+        itemArray.append(newItem)
+        
+        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
             itemArray = items
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,8 +42,12 @@ class TodoListViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
         
+        cell.textLabel?.text = item.title
+        //Ternay operator
+        cell.accessoryType = item.done ? .checkmark : .none
+
         return cell
     }
     
@@ -49,12 +58,15 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //make the check mark on the row
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done     //reverse the bool value
         
+//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+//        } else {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+//        }
+        
+        tableView.reloadData() //reload all tableView
         tableView.deselectRow(at: indexPath, animated: true)    //make the select gray animated dismiss
     }
     
@@ -71,7 +83,10 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) {
             (action) in
             //waht will happen once the user clicks the Add Item button on UIAlert Button
-            self.itemArray.append(textField.text!)
+            let newItem = Item()
+            newItem.title = textField.text!
+            
+            self.itemArray.append(newItem)
             
             //save the itemArray in persisten way
             self.defaults.setValue(self.itemArray, forKey: "TodoListArray")
