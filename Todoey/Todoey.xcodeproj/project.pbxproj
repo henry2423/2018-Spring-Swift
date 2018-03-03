@@ -10,6 +10,7 @@
 		52BF1F6F091B0E714992DBAB /* Pods_Todoey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FEC1CD32333D87E258A9B6 /* Pods_Todoey.framework */; };
 		BA20C7FB204A88FD00CED020 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20C7FA204A88FD00CED020 /* Item.swift */; };
 		BA20C7FD204A890800CED020 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20C7FC204A890800CED020 /* Category.swift */; };
+		BA491D5D204A9CAC002C5AC0 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA491D5C204A9CAC002C5AC0 /* SwipeTableViewController.swift */; };
 		BA5D20F82049CF7900FF9DA8 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5D20F72049CF7900FF9DA8 /* CategoryTableViewController.swift */; };
 		BA6D0E9420497AF00016638D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6D0E9320497AF00016638D /* AppDelegate.swift */; };
 		BA6D0E9620497AF00016638D /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6D0E9520497AF00016638D /* TodoListViewController.swift */; };
@@ -24,6 +25,7 @@
 		976E387B7F5268B4CAA49B93 /* Pods-Todoey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todoey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Todoey/Pods-Todoey.debug.xcconfig"; sourceTree = "<group>"; };
 		BA20C7FA204A88FD00CED020 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BA20C7FC204A890800CED020 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		BA491D5C204A9CAC002C5AC0 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		BA5D20F72049CF7900FF9DA8 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryTableViewController.swift; path = Todoey/Controllers/CategoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		BA6D0E9020497AF00016638D /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6D0E9320497AF00016638D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				BA6D0E9520497AF00016638D /* TodoListViewController.swift */,
 				BA5D20F72049CF7900FF9DA8 /* CategoryTableViewController.swift */,
+				BA491D5C204A9CAC002C5AC0 /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,13 +210,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,6 +271,7 @@
 				BA6D0E9620497AF00016638D /* TodoListViewController.swift in Sources */,
 				BA6D0E9420497AF00016638D /* AppDelegate.swift in Sources */,
 				BA5D20F82049CF7900FF9DA8 /* CategoryTableViewController.swift in Sources */,
+				BA491D5D204A9CAC002C5AC0 /* SwipeTableViewController.swift in Sources */,
 				BA20C7FD204A890800CED020 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
