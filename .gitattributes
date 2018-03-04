@@ -5,3 +5,4 @@
 ./SeeFood/** filter=lfs diff=lfs merge=lfs -text
 ./SeeFood/**
  filter=lfs diff=lfs merge=lfs -text
+.PokemonAR/** filter=lfs diff=lfs merge=lfs -text
