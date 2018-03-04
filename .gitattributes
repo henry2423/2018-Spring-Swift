@@ -7,3 +7,5 @@
 ./SeeFood-ibm/** filter=lfs diff=lfs merge=lfs -text
 WhatFlower/** filter=lfs diff=lfs merge=lfs -text
 PokemonAR/** filter=lfs diff=lfs merge=lfs -text
+AR[[:space:]]Ruler/** filter=lfs diff=lfs merge=lfs -text
+AR/[[:space:]]Ruler/** filter=lfs diff=lfs merge=lfs -text
