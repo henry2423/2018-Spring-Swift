@@ -9,14 +9,14 @@
 
 #### ![Finished App](https://github.com/londonappbrewery/Images/blob/master/Flash%20Chat.gif)
 
-#### 1. 09-Todoey -> CoreData feature and Complete UI/UX design
+#### 2. 09-Todoey -> CoreData feature and Complete UI/UX design
 
 #### ![Finished App](https://github.com/henry2423/2018-Spring-Swift/blob/master/09-Todoey/screenshot.gif)
 
-#### 2. 12-WhatFlower -> Machine Learning in iOS with CoreML
+#### 3. 12-WhatFlower -> Machine Learning in iOS with CoreML
 
 #### ![Finished App](https://github.com/henry2423/2018-Spring-Swift/blob/master/12-WhatFlower/screenshot.gif)
 
-#### 3. 14-PokemonAR -> AR featured in iOS with Unity
+#### 4. 14-PokemonAR -> AR featured in iOS with Unity
 
 #### ![Finished App](https://github.com/henry2423/2018-Spring-Swift/blob/master/14-PokemonAR/screenshot.gif)
