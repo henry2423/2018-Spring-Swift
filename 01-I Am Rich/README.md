@@ -2,4 +2,4 @@
 A easy example to set the image asset into project
 
 ## Finished App
-![Finished App](screenshot.png)
+<img src="screenshot.png" width="350">
