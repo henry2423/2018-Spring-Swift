@@ -9,3 +9,5 @@
 ./PokemonAR/** filter=lfs diff=lfs merge=lfs -text
 ./SeeFood-ibm/** filter=lfs diff=lfs merge=lfs -text
 ./WhatFlower/** filter=lfs diff=lfs merge=lfs -text
+somefile filter=lfs diff=lfs merge=lfs -text
+WhatFlower/WhatFlower/FlowerClassifier.mlmodel filter=lfs diff=lfs merge=lfs -text
