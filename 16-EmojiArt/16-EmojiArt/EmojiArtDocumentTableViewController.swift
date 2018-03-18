@@ -13,7 +13,7 @@ class EmojiArtDocumentTableViewController: UITableViewController {
     var emojiArtDocuments = ["One", "Two", "Three"]
     
 
-    // MARK: - UITable view dataSource Methods
+    // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -32,12 +32,25 @@ class EmojiArtDocumentTableViewController: UITableViewController {
         return cell
     }
 
-    //create new document
+    // MARK: - Target/Action
+    
     @IBAction func newEmojiArt(_ sender: UIBarButtonItem) {
         emojiArtDocuments += ["Untitled".madeUnique(withRespectTo: emojiArtDocuments)]
         tableView.reloadData()
         
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        //in case that go into loop
+        if splitViewController?.preferredDisplayMode != .primaryOverlay {
+            splitViewController?.preferredDisplayMode = .primaryOverlay
+        }
+    }
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -131,6 +131,15 @@ extension UIImage
         }
         return nil
     }
+    
+    func scaled(by factor: CGFloat) -> UIImage? {
+        let newSize = CGSize(width: size.width * factor, height: size.height * factor)
+        UIGraphicsBeginImageContext(newSize)
+        draw(in: CGRect(origin: CGPoint.zero, size: newSize))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
 
 extension String {
@@ -166,7 +175,7 @@ extension NSAttributedString {
 
 extension String {
     func attributedString(withTextStyle style: UIFontTextStyle, ofSize size: CGFloat) -> NSAttributedString {
-        let font = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.preferredFont(forTextStyle: .body).withSize(size))
+        let font = UIFont.preferredFont(forTextStyle: style).withSize(size)
         return NSAttributedString(string: self, attributes: [.font:font])
     }
 }
@@ -212,5 +221,18 @@ extension UIView {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+}
+
+extension UIDocumentState: CustomStringConvertible {
+    public var description: String {
+        return [
+            UIDocumentState.normal.rawValue:".normal",
+            UIDocumentState.closed.rawValue:".closed",
+            UIDocumentState.inConflict.rawValue:".inConflict",
+            UIDocumentState.savingError.rawValue:".savingError",
+            UIDocumentState.editingDisabled.rawValue:".editingDisabled",
+            UIDocumentState.progressAvailable.rawValue:".progressAvailable"
+            ][rawValue] ?? String(rawValue)
     }
 }
