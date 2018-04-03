@@ -19,14 +19,14 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     var emojiArt: EmojiArt? {
         get {
             if let url = emojiArtBackgroundImage.url {
-                let emojis = emojiArtView.subviews.flatMap { $0 as? UILabel }.flatMap { EmojiArt.EmojiInfo(label: $0) }
+                let emojis = emojiArtView.subviews.compactMap { $0 as? UILabel }.compactMap { EmojiArt.EmojiInfo(label: $0) }
                 return EmojiArt(url: url, emojis: emojis)
             }
             return nil
         }
         set {
             emojiArtBackgroundImage = (nil, nil)
-            emojiArtView.subviews.flatMap { $0 as? UILabel }.forEach { $0.removeFromSuperview() }
+            emojiArtView.subviews.compactMap { $0 as? UILabel }.forEach { $0.removeFromSuperview() }
             if let url = newValue?.url {
                 imageFetcher = ImageFetcher(fetch: url) { (url, image) in
                     DispatchQueue.main.async {
@@ -431,6 +431,22 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     
     var imageFetcher: ImageFetcher!
     
+    private var suppressBadURLWarnings = false
+    
+    private func presentBadURLWarning(for url: URL?) {
+        if !suppressBadURLWarnings {
+            let alert = UIAlertController(title: "Image Transfer Failed", message: "Couldn't transfer the dropped image from its source.\nShow this warning in the future?", preferredStyle: .alert)
+            
+            //add two button
+            alert.addAction(UIAlertAction(title: "Keep Warning", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Stop Warning", style: .destructive, handler: { (action) in
+                self.suppressBadURLWarnings = true
+            }))
+            
+            present(alert, animated: true)
+        }
+    }
+    
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         imageFetcher = ImageFetcher() { (url, image) in
             DispatchQueue.main.async {
@@ -450,7 +466,18 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         
         session.loadObjects(ofClass: NSURL.self) { nsurls in
             if let url = nsurls.first as? URL {
-                self.imageFetcher.fetch(url)
+                //self.imageFetcher.fetch(url)
+                //doing fetch not on the main queue
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if let imageData = try? Data(contentsOf: url.imageURL), let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            self.emojiArtBackgroundImage = (url, image)
+                            self.documentChanged()
+                        }
+                    } else {
+                        self.presentBadURLWarning(for: url)
+                    }
+                }
             }
         }
         session.loadObjects(ofClass: UIImage.self) { images in
