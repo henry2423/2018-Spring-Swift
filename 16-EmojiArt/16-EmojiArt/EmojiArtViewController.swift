@@ -88,14 +88,31 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         // dismiss ourselves from having been presented modally
         // and when we're done, close our document
         dismiss(animated: true) {
-            self.document?.close()
+            self.document?.close{ sucess in
+                if let observer = self.documentObserver {
+                    NotificationCenter.default.removeObserver(observer)
+                }
+            }
         }
     }
+    
+    private var documentObserver: NSObjectProtocol?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // whenever we appear, we'll open our document
         // (might want to close it in viewDidDisappear, by the way)
+        
+        //start notification observe till file being closed
+        documentObserver = NotificationCenter.default.addObserver(
+            forName: Notification.Name.UIDocumentStateChanged,
+            object: document,
+            queue: OperationQueue.main,
+            using: { (notification) in
+                print("documentState change to \(self.document!.documentState)")
+            }
+        )
+
         document?.open { success in
             if success {
                 self.title = self.document?.localizedName
