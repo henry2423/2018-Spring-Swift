@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, EmojiArtViewDelegate
+class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate
 {
     // MARK: - Model
     
@@ -71,6 +71,12 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     }
     
     @IBAction func close(_ sender: UIBarButtonItem) {
+        
+        //stop listening the emojiArtViewObserver notification when file close
+        if let observer = emojiArtViewObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        
         // MODIFIED AFTER LECTURE 14
         // the call to save() that used to be here has been removed
         // because we no longer explicitly save our document
@@ -97,13 +103,14 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     }
     
     private var documentObserver: NSObjectProtocol?
+    private var emojiArtViewObserver: NSObjectProtocol?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // whenever we appear, we'll open our document
         // (might want to close it in viewDidDisappear, by the way)
         
-        //start notification observe till file being closed
+        //start listening notification till file being closed
         documentObserver = NotificationCenter.default.addObserver(
             forName: Notification.Name.UIDocumentStateChanged,
             object: document,
@@ -118,8 +125,19 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
                 self.title = self.document?.localizedName
                 // update our Model from the document's Model
                 self.emojiArt = self.document?.emojiArt
+                
+                //start listening notification when view being change
+                self.emojiArtViewObserver = NotificationCenter.default.addObserver(
+                    forName: Notification.Name.EmojiArtViewDidChange,
+                    object: self.emojiArtView,
+                    queue: OperationQueue.main,
+                    using: { (notification) in
+                        self.documentChanged()
+                    }
+                )
             }
         }
+        
     }
     
     // MARK: - Storyboard
@@ -165,19 +183,9 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     // when we create our EmojiArtView, we also set ourself as its delegate
     // so that we can get emojiArtViewDidChange messages sent to us
     
-    lazy var emojiArtView: EmojiArtView = {
-        let eav = EmojiArtView()
-        eav.delegate = self
-        return eav
-    }()
+    lazy var emojiArtView = EmojiArtView()
     
-    // EmojiArtViewDelegate
     
-    func emojiArtViewDidChange(_ sender: EmojiArtView) {
-        // just let our document know that the document has changed
-        // that way it can autosave it at an opportune time
-        documentChanged()
-    }
     
     // we make this a tuple
     // so that whenever a background image is set

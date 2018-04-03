@@ -49,6 +49,7 @@ extension EmojiArtView
                 recognizer.setTranslation(CGPoint.zero, in: self)
                 if recognizer.state == .ended {
                     delegate?.emojiArtViewDidChange(self)
+                    NotificationCenter.default.post(name: .EmojiArtViewDidChange, object: self)
                 }
             }
         default:
@@ -93,6 +94,7 @@ extension EmojiArtView
                 recognizer.scale = 1.0
                 if recognizer.state == .ended {
                     delegate?.emojiArtViewDidChange(self)
+                    NotificationCenter.default.post(name: .EmojiArtViewDidChange, object: self)
                 }
             }
         default:
