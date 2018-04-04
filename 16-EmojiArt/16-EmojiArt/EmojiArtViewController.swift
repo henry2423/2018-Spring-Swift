@@ -10,6 +10,17 @@ import UIKit
 
 class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate
 {
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Show Document Info" {
+            if let destination = segue.destination.contents as? DocumentInfoViewController {
+                document?.thumbnail = emojiArtView.snapshot
+                destination.document = document
+            }
+        }
+    }
+    
     // MARK: - Model
     
     // computed property for our Model
@@ -93,7 +104,8 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
         }
         // dismiss ourselves from having been presented modally
         // and when we're done, close our document
-        dismiss(animated: true) {
+        // call the presenting controller to dismiss me
+        presentingViewController?.dismiss(animated: true) {
             self.document?.close{ sucess in
                 if let observer = self.documentObserver {
                     NotificationCenter.default.removeObserver(observer)
