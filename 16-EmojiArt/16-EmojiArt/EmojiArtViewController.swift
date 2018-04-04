@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate
+class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIPopoverPresentationControllerDelegate
 {
     // MARK: - Navigation
     
@@ -17,9 +17,22 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
             if let destination = segue.destination.contents as? DocumentInfoViewController {
                 document?.thumbnail = emojiArtView.snapshot
                 destination.document = document
+                if let ppc = destination.popoverPresentationController {
+                    ppc.delegate = self
+                }
             }
         }
     }
+    
+    // MARK: - UIPopoverPresentationControllerDelegation
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection)
+        -> UIModalPresentationStyle {
+            //don't adapt the popover for iphone, because the popover we set is small enough to fit in
+        return .none
+    }
+    
+    
     
     // MARK: - Model
     

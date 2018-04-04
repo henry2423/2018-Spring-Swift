@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -176,11 +177,20 @@
                                 <action selector="close:" destination="OQz-i5-pRM" id="qy7-fc-rPk"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Inspect" id="AK5-c2-3W1">
-                            <connections>
-                                <segue destination="lDl-Sl-Szb" kind="presentation" identifier="Show Document Info" modalPresentationStyle="formSheet" id="ttX-pu-MO3"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Pop" id="mQi-6E-vH7">
+                                <connections>
+                                    <segue destination="lDl-Sl-Szb" kind="popoverPresentation" identifier="Show Document Info" popoverAnchorBarButtonItem="mQi-6E-vH7" id="yFR-fc-bry">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Inspect" id="AK5-c2-3W1">
+                                <connections>
+                                    <segue destination="lDl-Sl-Szb" kind="presentation" identifier="Show Document Info" modalPresentationStyle="formSheet" id="ttX-pu-MO3"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="dropZone" destination="wtn-h3-dqO" id="QS5-d8-b2u"/>
@@ -199,11 +209,11 @@
             <objects>
                 <viewController id="lDl-Sl-Szb" customClass="DocumentInfoViewController" customModule="_6_EmojiArt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C36-v4-TRM">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-Cx-tDG">
-                                <rect key="frame" x="169.5" y="203.5" width="201.5" height="213"/>
+                                <rect key="frame" x="87" y="227" width="201.5" height="213"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GnY-0u-fmu">
                                         <rect key="frame" x="8.5" y="0.0" width="185" height="126"/>
@@ -270,9 +280,11 @@
                     </view>
                     <connections>
                         <outlet property="createdLabel" destination="4uV-yn-RGg" id="Azb-H5-53o"/>
+                        <outlet property="returnToDocumentButton" destination="yzP-uB-ac1" id="uHM-pi-7EL"/>
                         <outlet property="sizeLabel" destination="Nvc-bf-pec" id="wel-nW-1vD"/>
                         <outlet property="thumbnailAspectRatio" destination="98M-EL-n1W" id="hOz-ft-hMt"/>
                         <outlet property="thumbnailImageView" destination="GnY-0u-fmu" id="4PY-XV-X2v"/>
+                        <outlet property="topLevelView" destination="JnV-Cx-tDG" id="wfh-Hf-GD0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSR-J9-I5T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,4 +310,7 @@
             <point key="canvasLocation" x="-2" y="1195"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="yFR-fc-bry"/>
+    </inferredMetricsTieBreakers>
 </document>

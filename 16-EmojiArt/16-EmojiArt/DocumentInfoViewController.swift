@@ -52,13 +52,25 @@ class DocumentInfoViewController: UIViewController {
             )
             thumbnailImageView.addConstraint(thumbnailAspectRatio)
             
+            //if using popover, thumbnail and return button should not be showing
+            if presentationController is UIPopoverPresentationController {
+                thumbnailImageView.isHidden = true
+                returnToDocumentButton.isHidden = true
+                view.backgroundColor = .clear
+            }
         }
 
     }
 
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var sizeLabel: UILabel!
-    @IBOutlet weak var createdLabel: UILabel!
+    //gemotric stuff should be set here
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //go to autolay see the smallest possible sizes it can be
+        if let fittedSize = topLevelView?.sizeThatFits(UILayoutFittingCompressedSize) {
+            preferredContentSize = CGSize(width: fittedSize.width + 30, height: fittedSize.height + 30)
+        }
+        
+    }
     
     @IBAction func done() {
         //dismiss(self) can use also but it's more orthordox to call presentingViewController to dismiss myself
@@ -66,5 +78,12 @@ class DocumentInfoViewController: UIViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBOutlet weak var topLevelView: UIStackView!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var thumbnailAspectRatio: NSLayoutConstraint!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var createdLabel: UILabel!
+    @IBOutlet weak var returnToDocumentButton: UIButton!
+    
 }
