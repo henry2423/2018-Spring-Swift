@@ -206,9 +206,15 @@
                                     <segue destination="lDl-Sl-Szb" kind="presentation" identifier="Show Document Info" modalPresentationStyle="formSheet" id="ttX-pu-MO3"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem systemItem="camera" id="rXt-yR-ek3">
+                                <connections>
+                                    <action selector="takeBackgroundPhoto:" destination="OQz-i5-pRM" id="B4x-qw-6Ng"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraButton" destination="rXt-yR-ek3" id="3Nb-ok-8CB"/>
                         <outlet property="dropZone" destination="wtn-h3-dqO" id="QS5-d8-b2u"/>
                         <outlet property="embeddedDocInfoHeight" destination="ByQ-4s-uYx" id="Tqz-rC-mcE"/>
                         <outlet property="embeddedDocInfoWidth" destination="1OA-Rg-0qb" id="fiV-X9-0Bt"/>
