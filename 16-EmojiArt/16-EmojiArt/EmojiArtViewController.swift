@@ -293,8 +293,7 @@ class EmojiArtViewController: UIViewController, UIDropInteractionDelegate, UIScr
     
     lazy var emojiArtView = EmojiArtView()
     
-    
-    
+
     // we make this a tuple
     // so that whenever a background image is set
     // we also capture the url of that image
